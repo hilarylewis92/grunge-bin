@@ -56,14 +56,14 @@ $('.save-offender-btn').on('click', () => {
 
 
 $('.name-sort').on('click', () => {
-  sortOffenderList()
+  sortOffenderNameList()
 })
 
 $('.date-sort').on('click', () => {
-  // sortOffenderList()
+  sortOffenderDateList()
 })
 
-function sortOffenderList() {
+function sortOffenderNameList() {
   axios.get('/api/offenders')
   .then((res) => {
     sortByName(res)
@@ -81,6 +81,30 @@ function sortByName(res) {
     var y = b.offender.name.toLowerCase()
     if(x < y) return -1
     if(x > y) return 1
+    return 0
+  })
+  $('.offender-list').html('')
+  displayOffenders(sortedOffenders)
+}
+
+function sortOffenderDateList() {
+  axios.get('/api/offenders')
+  .then((res) => {
+    sortByDate(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+}
+
+function sortByDate(res) {
+  var {offenders} = res.data
+
+  var sortedOffenders = offenders.sort((a, b) => {
+    var x = a.offender.date
+    var y = b.offender.date
+    if(x > y) return -1
+    if(x < y) return 1
     return 0
   })
   $('.offender-list').html('')
