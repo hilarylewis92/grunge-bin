@@ -3,11 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title>
-      Final Assessment
+      Grunge Bin
     </title>
-  </head>
-  <body>
-    <h1>Grunge Bin</h1>
 
+    <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+
+  </head>
+
+  <body>
+    <h1 class="title">Grunge Bin</h1>
+
+    <form class="add-offender-form">
+      <input
+        class="name"
+        placeholder="name of offender"/>
+      <input
+        class="offense"
+        placeholder="reason why person is an offender"/>
+      <button class="save-offender-btn">add offender</button>
+    </form>
+
+    <section class="count">
+      <p class="forgiven-count">
+        5 people have successfully redeemed themselves
+      </p>
+
+      <p class="unforgiven-count">
+        10 people remain unforgiven
+      </p>
+    </section>
+
+    <input placeholder="search"/>
+
+    <ul class="offender-list"></ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="displayOffender.js"></script>
+    <script src="addOffender.js"></script>
   </body>
 </html>
