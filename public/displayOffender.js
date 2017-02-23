@@ -33,8 +33,13 @@ function countOffenders(res) {
   var totalUnforgiven = offenders.filter(offense => {
     return offense.offender.forgiven === false
   }).length
-  debugger
+  var totalForgiven = totalOffenders - totalUnforgiven
 
+  $('.count').append(`
+    <div>${totalOffenders} total offenders</div>
+    <div>${totalUnforgiven} total unforgiven offenders</div>
+    <div>${totalForgiven} total forgiven offenders</div>
+  `)
 }
 
 $('.save-offender-btn').on('click', () => {
