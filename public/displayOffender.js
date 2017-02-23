@@ -6,6 +6,7 @@ function getOffendersList() {
   axios.get('/api/offenders')
   .then((res) => {
     displayOffenders(res)
+    countOffenders(res)
   })
   .catch((err) => {
     console.error(err)
@@ -13,7 +14,7 @@ function getOffendersList() {
 }
 
 function displayOffenders(res) {
-  var offenders = res.data.offenders
+  var {offenders} = res.data
 
   offenders.map(offense => {
     $('.offender-list').append(`
@@ -23,6 +24,17 @@ function displayOffenders(res) {
       </li>
       `)
     })
+}
+
+function countOffenders(res) {
+  var {offenders} = res.data
+
+  var totalOffenders = offenders.length
+  var totalUnforgiven = offenders.filter(offense => {
+    return offense.offender.forgiven === false
+  }).length
+  debugger
+
 }
 
 $('.save-offender-btn').on('click', () => {
