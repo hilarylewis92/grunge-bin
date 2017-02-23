@@ -14,10 +14,13 @@
     <h1 class="title">Grunge Bin</h1>
 
     <form class="add-offender-form">
-      <input placeholder="name of offender"/>
-      <input placeholder="reason why person is an offender"/>
-      <input placeholder="name of offender"/>
-      <button>add offender to list</button>
+      <input
+        class="name"
+        placeholder="name of offender"/>
+      <input
+        class="offense"
+        placeholder="reason why person is an offender"/>
+      <button class="save-offender-btn">add offender</button>
     </form>
 
     <section class="count">
@@ -36,5 +39,6 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="displayOffender.js"></script>
+    <script src="addOffender.js"></script>
   </body>
 </html>
