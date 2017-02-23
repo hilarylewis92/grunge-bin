@@ -17,9 +17,10 @@ function displayOffenders(res) {
 
   offenders.map(offense => {
     $('.offender-list').append(`
-      <li class='offender-list-name'>${offense.offender.name}</li>
-      <li class='offender-list-offense'>${offense.offender.offense}</li>
-      <li class='offender-list-date'>${offense.offender.date}</li>
+      <li class='offender-list-item'>
+        <div>${offense.offender.name}</div> <div>${offense.offender.offense}</div>
+        <div>${offense.offender.date}</div>
+      </li>
       `)
     })
 }
