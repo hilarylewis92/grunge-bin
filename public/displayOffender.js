@@ -5,17 +5,16 @@ $(document).ready(() => {
 function getOffendersList() {
   axios.get('/api/offenders')
   .then((res) => {
-    displayOffenders(res)
-    countOffenders(res)
+    var {offenders} = res.data
+    displayOffenders(offenders)
+    countOffenders(offenders)
   })
   .catch((err) => {
     console.error(err)
   })
 }
 
-function displayOffenders(res) {
-  var {offenders} = res.data
-
+function displayOffenders(offenders) {
   offenders.map(offense => {
     $('.offender-list').append(`
       <li class='offender-list-item'>
@@ -26,9 +25,7 @@ function displayOffenders(res) {
     })
 }
 
-function countOffenders(res) {
-  var {offenders} = res.data
-
+function countOffenders(offenders) {
   var totalOffenders = offenders.length
   var totalUnforgiven = offenders.filter(offense => {
     return offense.offender.forgiven === false
@@ -56,3 +53,36 @@ $('.save-offender-btn').on('click', () => {
       console.log(err)
     })
 })
+
+
+$('.name-sort').on('click', () => {
+  sortOffenderList()
+})
+
+$('.date-sort').on('click', () => {
+  // sortOffenderList()
+})
+
+function sortOffenderList() {
+  axios.get('/api/offenders')
+  .then((res) => {
+    sortByName(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+}
+
+function sortByName(res) {
+  var {offenders} = res.data
+
+  var sortedOffenders = offenders.sort((a, b) => {
+    var x = a.offender.name.toLowerCase()
+    var y = b.offender.name.toLowerCase()
+    if(x < y) return -1
+    if(x > y) return 1
+    return 0
+  })
+  $('.offender-list').html('')
+  displayOffenders(sortedOffenders)
+}
