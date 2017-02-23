@@ -8,7 +8,10 @@ $('.save-offender-btn').on('click', (e) => {
       date: Date.now()
     })
     .then((res) => {
-      console.log(res)
+      return res.json()
+    })
+    .then((res) => {
+      console.log('addoff', res);
     })
     .catch((err) => {
       console.log(err)
