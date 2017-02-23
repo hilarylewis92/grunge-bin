@@ -1,0 +1,26 @@
+{
+  "name": "final-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilarylewis92/grunge-bin.git"
+  },
+  "author": "Hilary Lewis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hilarylewis92/grunge-bin/issues"
+  },
+  "homepage": "https://github.com/hilarylewis92/grunge-bin#readme",
+  "devDependencies": {
+    "express": "^4.14.1",
+    "node": "0.0.0",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7"
+  }
+}
