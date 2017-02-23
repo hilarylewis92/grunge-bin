@@ -13,15 +13,7 @@ const server = http.createServer(app)
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.locals.title = 'Grunge Bin'
-app.locals.offenders = [
-  {
-    id: 23498749580243029,
-    name: 'Donald Trump',
-    offense: 'He took my happiness forever',
-    forgiven: false,
-    date: Date.now()
-  }
-]
+app.locals.offenders = []
 
 app.get('/', (req, res) => {
   res.redirect('/api/offenders')
@@ -34,11 +26,11 @@ app.get('/api/offenders', (req, res) => {
 })
 
 app.post('/api/offenders', (req, res) => {
-  const offense = req.body
-  const id = md5(offense)
-  const offender = { id, offense }
+  const offender = req.body
+  const id = md5(offender)
+  const offense = { id, offender }
 
-  app.locals.offenders.push(offender)
+  app.locals.offenders.push(offense)
 })
 
 if(!module.parent){
