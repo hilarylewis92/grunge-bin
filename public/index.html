@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <title>
       Grunge Bin
     </title>
 
-    <script src='//code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+
   </head>
 
   <body>
-    <h1 class='title'>Grunge Bin</h1>
+    <h1 class="title">Grunge Bin</h1>
 
-    <form class='add-offender-form'>
-      <input placeholder='name of offender'/>
-      <input placeholder='reason why person is an offender'/>
-      <input placeholder='name of offender'/>
+    <form class="add-offender-form">
+      <input placeholder="name of offender"/>
+      <input placeholder="reason why person is an offender"/>
+      <input placeholder="name of offender"/>
       <button>add offender to list</button>
     </form>
 
-    <section class='count'>
-      <p class='forgiven-count'>
+    <section class="count">
+      <p class="forgiven-count">
         5 people have successfully redeemed themselves
       </p>
 
-      <p class='unforgiven-count'>
+      <p class="unforgiven-count">
         10 people remain unforgiven
       </p>
     </section>
 
-    <input placeholder='search'/>
+    <input placeholder="search"/>
 
-    <ul class='offender-list'></ul>
+    <ul class="offender-list"></ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="displayOffender.js"></script>
   </body>
 </html>
