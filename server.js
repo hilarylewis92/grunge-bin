@@ -13,26 +13,40 @@ const server = http.createServer(app)
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.locals.title = 'Grunge Bin'
-app.locals.offenders = [
-  {
-    id: 123134234234,
-    offender: {
-      name: 'Trump',
-      offense: 'Took my happiness',
-      forgiven: false,
-      date: Date.now()
-    }
-  }
-]
+app.locals.offenders = []
 
 app.get('/', (req, res) => {
   res.redirect('/api/offenders')
 })
 
 app.get('/api/offenders', (req, res) => {
-  const offenders = app.locals.offenders
+  const { offenders } = app.locals
 
   res.json({ offenders })
+})
+
+app.get('/api/offenders/:id', (req, res) => {
+  const { id } = req.params
+
+  var offender = app.locals.offenders.find(offender => {
+    return offender.id === id
+  })
+
+  res.json({id, offender})
+})
+
+app.patch('/api/offenders/:id', (req, res) => {
+  const { id } = req.params
+  var offenders = app.locals.offenders
+
+  const updateForgive = offenders.filter(offender => {
+    if(offender.id === id)
+      offender.offender.forgiven = !offender.offender.forgiven
+      return offender
+  })
+
+  offenders = updateForgive
+  res.status(200).json({offenders})
 })
 
 app.post('/api/offenders', (req, res) => {

@@ -10,16 +10,14 @@
 
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <link rel="stylesheet" type="text/css" href="./reset.css">
-
-
   </head>
 
-  <body>
+  <body class="hero">
     <h1 class="title">Grunge Bin</h1>
 
     <form class="add-offender-form">
       <input
-        class="name"
+        class="name-input"
         placeholder="name of offender"/>
       <input
         class="offense"
@@ -32,10 +30,11 @@
     <button class="name-sort">Sort by Name</button>
     <button class="date-sort">Sort by Date</button>
 
-    <ul class="offender-list"></ul>
+    <ul class="offender-list">
+      <li class="offender-list-item" id="list-item"></li>
+    </ul>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="displayOffender.js"></script>
-    <script src="addOffender.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>

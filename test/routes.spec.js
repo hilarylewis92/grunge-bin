@@ -32,4 +32,40 @@ describe('API Routes', function() {
       })
     })
   })
+
+  describe('POST /api/offenders/:id', function() {
+    it('should post an offender', function() {
+      chai.request(server)
+      .post('/api/offenders/1')
+      .end(function(err, res) {
+      res.should.have.status(200)
+      res.should.be.json
+      res.body.should.be.a('object')
+      })
+    })
+  })
+
+  describe('GET /api/offenders/:id', function() {
+    it('should post an offender', function() {
+      chai.request(server)
+      .get('/api/offenders/1')
+      .end(function(err, res) {
+      res.should.have.status(200)
+      res.should.be.json
+      res.body.should.be.a('object')
+      })
+    })
+  })
+
+  describe('PATCH /api/offenders/:id', function() {
+    it('should post an offender', function() {
+      chai.request(server)
+      .patch('/api/offenders/1')
+      .end(function(err, res) {
+      res.should.have.status(200)
+      res.should.be.json
+      res.body.should.be.a('object')
+      })
+    })
+  })
 })

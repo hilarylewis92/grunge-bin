@@ -5,7 +5,7 @@ $(document).ready(() => {
 function getOffendersList() {
   axios.get('/api/offenders')
   .then((res) => {
-    var {offenders} = res.data
+    const {offenders} = res.data
     displayOffenders(offenders)
     countOffenders(offenders)
   })
@@ -16,11 +16,11 @@ function getOffendersList() {
 
 function displayOffenders(offenders) {
   offenders.map(offense => {
-    $('.offender-list').append(`
-      <li class='offender-list-item'>
-        <div>${offense.offender.name}</div> <div>${offense.offender.offense}</div>
-        <div>${offense.offender.date}</div>
-      </li>
+    $('.offender-list-item').append(`
+      <p id=${offense.id} class='name'>${offense.offender.name}</p>
+      <div>${offense.offender.offense}</div>
+      <div>${offense.offender.date}</div>
+      <div>Forgiven: ${offense.offender.forgiven}</div>
       `)
     })
 }
@@ -39,9 +39,17 @@ function countOffenders(offenders) {
   `)
 }
 
-$('.save-offender-btn').on('click', () => {
+function clearValues() {
+  $('.offender-list-item').html('')
+  $('.count').html('')
+  $('.offense').val('')
+  $('.name-input').val('')
+}
+
+$('.save-offender-btn').on('click', (e) => {
+  e.preventDefault()
   axios.post('/api/offenders', {
-      name: $('.name').val(),
+      name: $('.name-input').val(),
       offense: $('.offense').val(),
       forgiven: false,
       date: Date.now()
@@ -52,6 +60,7 @@ $('.save-offender-btn').on('click', () => {
     .catch((err) => {
       console.log(err)
     })
+    clearValues()
 })
 
 
@@ -83,7 +92,7 @@ function sortByName(res) {
     if(x > y) return 1
     return 0
   })
-  $('.offender-list').html('')
+  $('.offender-list-item').html('')
   displayOffenders(sortedOffenders)
 }
 
@@ -107,6 +116,44 @@ function sortByDate(res) {
     if(x < y) return 1
     return 0
   })
-  $('.offender-list').html('')
+  $('.offender-list-item').html('')
   displayOffenders(sortedOffenders)
 }
+
+$('.offender-list-item').on('click', '.name', (e) => {
+  var { id } = e.target
+
+  axios.get(`/api/offenders/${id}`)
+  .then((res) => {
+    displayOffender(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
+
+function displayOffender(res) {
+  $('.offender-list-item').html('')
+
+  const {id} = res.data
+  const {offender} = res.data.offender
+
+  $('.offender-list-item').append(`
+    <p class='name'>${offender.name}</p>
+    <div>${offender.offense}</div>
+    <div>${offender.date}</div>
+    <div>Forgiven: ${offender.forgiven}</div>
+    <button class='forgive' id=${id}>forgive</button>
+    `)
+}
+
+$('.offender-list-item').on('click', '.forgive', (e) => {
+  const { id } = e.target
+  axios.patch(`/api/offenders/${id}`)
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
