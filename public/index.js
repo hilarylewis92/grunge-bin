@@ -20,7 +20,6 @@ function displayOffenders(offenders) {
       <p id=${offense.id} class='name'>${offense.offender.name}</p>
       <div>${offense.offender.offense}</div>
       <div>${offense.offender.date}</div>
-      <button>forgive</button>
       `)
     })
 }
@@ -133,14 +132,28 @@ $('.offender-list-item').on('click', '.name', (e) => {
 })
 
 function displayOffender(res) {
+  const {id} = res.data
   const {offender} = res.data.offender
 
-  debugger;
   $('.offender-list-item').html('')
   $('.offender-list-item').append(`
     <p class='name'>${offender.name}</p>
     <div>${offender.offense}</div>
     <div>${offender.date}</div>
-    <button>forgive</button>
+    <button class='forgive' id=${id}>forgive</button>
     `)
 }
+
+$('.offender-list-item').on('click', '.forgive', (e) => {
+  const { id } = e.target
+
+
+  axios.patch(`/api/offenders/${id}`)
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+
+})

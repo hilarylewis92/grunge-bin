@@ -39,11 +39,24 @@ app.get('/api/offenders/:id', (req, res) => {
   const { id } = req.params
 
   var offender = app.locals.offenders.find(offender => {
-    console.log(id);
     return offender.id === id
   })
 
-  res.json({offender})
+  res.json({id, offender})
+})
+
+app.patch('/api/offenders/:id', (req, res) => {
+  const { id } = req.params
+  var offenders = app.locals.offenders
+
+  const updateForgive = offenders.filter(offender => {
+    if(offender.id === id)
+      offender.offender.forgiven = !offender.offender.forgiven
+      return offender
+  })
+
+  offenders = updateForgive
+  res.status(200).json({offenders})
 })
 
 app.post('/api/offenders', (req, res) => {
