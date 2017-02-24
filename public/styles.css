@@ -4,14 +4,15 @@ body {
 }
 
 button {
+  display: block;
   border: 1px solid gray;
   color: gray;
   border-radius: 10px;
   padding: 10px 30px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
+  margin: 10px auto;
 }
 
 button:hover {
@@ -21,7 +22,7 @@ button:hover {
 }
 
 input {
-  width: 80%;
+  width: 60%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
