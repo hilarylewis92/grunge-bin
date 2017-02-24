@@ -5,7 +5,7 @@ $(document).ready(() => {
 function getOffendersList() {
   axios.get('/api/offenders')
   .then((res) => {
-    var {offenders} = res.data
+    const {offenders} = res.data
     displayOffenders(offenders)
     countOffenders(offenders)
   })
@@ -20,6 +20,7 @@ function displayOffenders(offenders) {
       <p id=${offense.id} class='name'>${offense.offender.name}</p>
       <div>${offense.offender.offense}</div>
       <div>${offense.offender.date}</div>
+      <div>Forgiven: ${offense.offender.forgiven}</div>
       `)
     })
 }
@@ -132,22 +133,22 @@ $('.offender-list-item').on('click', '.name', (e) => {
 })
 
 function displayOffender(res) {
+  $('.offender-list-item').html('')
+
   const {id} = res.data
   const {offender} = res.data.offender
 
-  $('.offender-list-item').html('')
   $('.offender-list-item').append(`
     <p class='name'>${offender.name}</p>
     <div>${offender.offense}</div>
     <div>${offender.date}</div>
+    <div>Forgiven: ${offender.forgiven}</div>
     <button class='forgive' id=${id}>forgive</button>
     `)
 }
 
 $('.offender-list-item').on('click', '.forgive', (e) => {
   const { id } = e.target
-
-
   axios.patch(`/api/offenders/${id}`)
   .then((res) => {
     console.log(res)
@@ -155,5 +156,4 @@ $('.offender-list-item').on('click', '.forgive', (e) => {
   .catch((err) => {
     console.error(err)
   })
-
 })
