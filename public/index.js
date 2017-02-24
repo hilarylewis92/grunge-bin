@@ -43,13 +43,13 @@ function clearValues() {
   $('.offender-list-item').html('')
   $('.count').html('')
   $('.offense').val('')
-  $('.name').val('')
+  $('.name-input').val('')
 }
 
 $('.save-offender-btn').on('click', (e) => {
   e.preventDefault()
   axios.post('/api/offenders', {
-      name: $('.name').val(),
+      name: $('.name-input').val(),
       offense: $('.offense').val(),
       forgiven: false,
       date: Date.now()

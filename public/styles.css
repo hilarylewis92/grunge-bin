@@ -1,10 +1,47 @@
-.offender-list-item {
-  padding: 20px;
+body {
+  text-align: center;
+  font-size: 20px;
+}
+
+button {
+  border: 1px solid gray;
+  color: gray;
+  border-radius: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+button:hover {
+  cursor: pointer;
+  color: black;
+  border: 1px solid black;
+}
+
+input {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.count {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.title {
+  font-size: 45px;
+  margin: 20px;
 }
 
 .name{
   margin-top: 20px;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .name:hover{

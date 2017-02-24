@@ -13,17 +13,7 @@ const server = http.createServer(app)
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.locals.title = 'Grunge Bin'
-app.locals.offenders = [
-  {
-    id: 123134234234,
-    offender: {
-      name: 'Trump',
-      offense: 'Took my happiness',
-      forgiven: false,
-      date: Date.now()
-    }
-  }
-]
+app.locals.offenders = []
 
 app.get('/', (req, res) => {
   res.redirect('/api/offenders')
