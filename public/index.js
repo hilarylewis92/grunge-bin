@@ -16,11 +16,11 @@ function getOffendersList() {
 
 function displayOffenders(offenders) {
   offenders.map(offense => {
-    $('.offender-list').append(`
-      <li class='offender-list-item'>
-        <div>${offense.offender.name}</div> <div>${offense.offender.offense}</div>
-        <div>${offense.offender.date}</div>
-      </li>
+    $('.offender-list-item').append(`
+      <p id=${offense.id} class='name'>${offense.offender.name}</p>
+      <div>${offense.offender.offense}</div>
+      <div>${offense.offender.date}</div>
+      <button>forgive</button>
       `)
     })
 }
@@ -39,7 +39,15 @@ function countOffenders(offenders) {
   `)
 }
 
-$('.save-offender-btn').on('click', () => {
+function clearValues() {
+  $('.offender-list-item').html('')
+  $('.count').html('')
+  $('.offense').val('')
+  $('.name').val('')
+}
+
+$('.save-offender-btn').on('click', (e) => {
+  e.preventDefault()
   axios.post('/api/offenders', {
       name: $('.name').val(),
       offense: $('.offense').val(),
@@ -52,6 +60,7 @@ $('.save-offender-btn').on('click', () => {
     .catch((err) => {
       console.log(err)
     })
+    clearValues()
 })
 
 
@@ -83,7 +92,7 @@ function sortByName(res) {
     if(x > y) return 1
     return 0
   })
-  $('.offender-list').html('')
+  $('.offender-list-item').html('')
   displayOffenders(sortedOffenders)
 }
 
@@ -107,6 +116,31 @@ function sortByDate(res) {
     if(x < y) return 1
     return 0
   })
-  $('.offender-list').html('')
+  $('.offender-list-item').html('')
   displayOffenders(sortedOffenders)
+}
+
+$('.offender-list-item').on('click', '.name', (e) => {
+  var { id } = e.target
+
+  axios.get(`/api/offenders/${id}`)
+  .then((res) => {
+    displayOffender(res)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
+
+function displayOffender(res) {
+  const {offender} = res.data.offender
+
+  debugger;
+  $('.offender-list-item').html('')
+  $('.offender-list-item').append(`
+    <p class='name'>${offender.name}</p>
+    <div>${offender.offense}</div>
+    <div>${offender.date}</div>
+    <button>forgive</button>
+    `)
 }

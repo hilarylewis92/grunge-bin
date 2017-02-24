@@ -30,9 +30,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/offenders', (req, res) => {
-  const offenders = app.locals.offenders
+  const { offenders } = app.locals
 
   res.json({ offenders })
+})
+
+app.get('/api/offenders/:id', (req, res) => {
+  const { id } = req.params
+
+  var offender = app.locals.offenders.find(offender => {
+    console.log(id);
+    return offender.id === id
+  })
+
+  res.json({offender})
 })
 
 app.post('/api/offenders', (req, res) => {
