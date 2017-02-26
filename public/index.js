@@ -151,7 +151,8 @@ $('.offender-list-item').on('click', '.forgive', (e) => {
   const { id } = e.target
   axios.patch(`/api/offenders/${id}`)
   .then((res) => {
-    console.log(res)
+    clearValues()
+    getOffendersList()
   })
   .catch((err) => {
     console.error(err)
