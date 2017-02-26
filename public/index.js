@@ -139,7 +139,7 @@ function displayOffender(res) {
   const {offender} = res.data.offender
 
   $('.offender-list-item').append(`
-    <p class='name'>${offender.name}</p>
+    <p id=${offender.id} class='name'>${offender.name}</p>
     <div>${offender.offense}</div>
     <div>${offender.date}</div>
     <div>Forgiven: ${offender.forgiven}</div>
