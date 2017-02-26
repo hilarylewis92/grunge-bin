@@ -51,7 +51,7 @@ app.patch('/api/offenders/:id', (req, res) => {
 
 app.post('/api/offenders', (req, res) => {
   const offender = req.body
-  const id = md5(offender)
+  const id = md5(req.body.name)
   const offense = { id, offender }
 
   app.locals.offenders.push(offense)
