@@ -138,12 +138,20 @@ function displayOffender(res) {
   const {id} = res.data
   const {offender} = res.data.offender
 
+  let unforgive
+  let forgive
+  if(offender.forgiven) {
+    offender.forgiven = 'unforgive'
+  }else{
+    offender.forgiven = 'forgive'
+  }
+
   $('.offender-list-item').append(`
     <p id=${offender.id} class='name'>${offender.name}</p>
     <div>${offender.offense}</div>
     <div>${offender.date}</div>
     <div>Forgiven: ${offender.forgiven}</div>
-    <button class='forgive' id=${id}>forgive</button>
+    <button class='forgive' id=${id}>${offender.forgiven}</button>
     `)
 }
 
