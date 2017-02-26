@@ -150,7 +150,6 @@ function displayOffender(res) {
     <p id=${offender.id} class='name'>${offender.name}</p>
     <div>${offender.offense}</div>
     <div>${offender.date}</div>
-    <div>Forgiven: ${offender.forgiven}</div>
     <button class='forgive' id=${id}>${offender.forgiven}</button>
     `)
 }
