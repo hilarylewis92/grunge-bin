@@ -4,6 +4,8 @@ const path = require('path')
 const md5 = require('md5')
 const bodyParser = require('body-parser')
 const http = require('http')
+const moment = require('moment')
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -51,7 +53,7 @@ app.patch('/api/offenders/:id', (req, res) => {
 
 app.post('/api/offenders', (req, res) => {
   const offender = req.body
-  const id = md5(offender)
+  const id = md5(req.body.name)
   const offense = { id, offender }
 
   app.locals.offenders.push(offense)
