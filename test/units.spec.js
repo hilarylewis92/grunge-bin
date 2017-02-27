@@ -69,11 +69,10 @@ describe('countOffenders', function(){
     expect(subject.totalForgiven).to.equal(1);
   })
 
-  xit('handles no grudges', function(){
-    // bug here!
-    var subject = returnCounts({});
-    expect(subject.total).to.equal(0);
-    expect(subject.unforgiven).to.equal(0);
-    expect(subject.forgiven).to.equal(0);
+  it('handles no offenders', function(){
+    var subject = countOffenders([]);
+    expect(subject.totalOffenders).to.equal(0);
+    expect(subject.totalUnforgiven).to.equal(0);
+    expect(subject.totalForgiven).to.equal(0);
   })
 })
