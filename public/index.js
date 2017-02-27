@@ -16,13 +16,17 @@ function getOffendersList() {
 
 function displayOffenders(offenders) {
   offenders.map(offense => {
-    $('.offender-list-item').append(`
-      <p id=${offense.id} class='name'>${offense.offender.name}</p>
-      <div>${offense.offender.offense}</div>
-      <div>${offense.offender.date}</div>
-      <div>Forgiven: ${offense.offender.forgiven}</div>
-    `)
+    offendersTemplate(offense)
   })
+}
+
+function offendersTemplate(offense) {
+  $('.offender-list-item').append(`
+    <p id=${offense.id} class='name'>${offense.offender.name}</p>
+    <div>${offense.offender.offense}</div>
+    <div>${offense.offender.date}</div>
+    <div>Forgiven: ${offense.offender.forgiven}</div>
+  `)
 }
 
 function countOffenders(offenders) {
