@@ -7,11 +7,11 @@ offendersTemplate = (offense) => {
   `)
 }
 
-countTemplate = (totalOffenders, totalUnforgiven, totalForgiven) => {
+countTemplate = (countedOffenders) => {
   $('.count').append(`
-    <div>${totalOffenders} total offenders</div>
-    <div>${totalUnforgiven} total unforgiven offenders</div>
-    <div>${totalForgiven} total forgiven offenders</div>
+    <div>${countedOffenders.totalOffenders} total offenders</div>
+    <div>${countedOffenders.totalUnforgiven} total unforgiven offenders</div>
+    <div>${countedOffenders.totalForgiven} total forgiven offenders</div>
   `)
 }
 

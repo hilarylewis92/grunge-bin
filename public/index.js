@@ -7,27 +7,22 @@ getOffendersList = () => {
   .then((res) => {
     const { offenders } = res.data
     displayOffenders(offenders)
-    countOffenders(offenders)
+    count(offenders)
   })
   .catch((err) => {
     console.error(err)
   })
 }
 
+count = (offenders) => {
+  const countedOffenders = countOffenders(offenders)
+  countTemplate(countedOffenders)
+}
+
 displayOffenders = (offenders) => {
   offenders.map((offense) => {
     offendersTemplate(offense)
   })
-}
-
-countOffenders = (offenders) => {
-  let totalOffenders = offenders.length
-  let totalUnforgiven = offenders.filter((offense) => {
-    return offense.offender.forgiven === false
-  }).length
-  let totalForgiven = totalOffenders - totalUnforgiven
-
-  countTemplate(totalOffenders, totalUnforgiven, totalForgiven)
 }
 
 clearValues = () => {

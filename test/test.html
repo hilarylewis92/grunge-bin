@@ -13,13 +13,16 @@
 
   <script>mocha.setup('bdd')</script>
 
+  <script src="../public/sort.js"></script>
+  <script src="../public/count.js"></script>
+  <script src="../public/templates.js"></script>
   <script src="../public/index.js"></script>
   <script src="./units.spec.js"></script>
 
   <script>
-    mocha.checkLeaks();
-    mocha.globals(['jQuery']);
-    mocha.run();
+    mocha.checkLeaks()
+    mocha.globals(['jQuery'])
+    mocha.run()
   </script>
 </body>
 </html>
