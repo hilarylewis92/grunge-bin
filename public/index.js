@@ -21,8 +21,8 @@ function displayOffenders(offenders) {
       <div>${offense.offender.offense}</div>
       <div>${offense.offender.date}</div>
       <div>Forgiven: ${offense.offender.forgiven}</div>
-      `)
-    })
+    `)
+  })
 }
 
 function countOffenders(offenders) {
@@ -32,6 +32,10 @@ function countOffenders(offenders) {
   }).length
   var totalForgiven = totalOffenders - totalUnforgiven
 
+  countTemplate(totalOffenders, totalUnforgiven, totalForgiven)
+}
+
+function countTemplate(totalOffenders, totalUnforgiven, totalForgiven){
   $('.count').append(`
     <div>${totalOffenders} total offenders</div>
     <div>${totalUnforgiven} total unforgiven offenders</div>
