@@ -74,20 +74,6 @@ sortOffenderNameList = () => {
   })
 }
 
-sortByName = (res) => {
-  const { offenders } = res.data
-
-  let sortedOffenders = offenders.sort((a, b) => {
-    let x = a.offender.name.toLowerCase()
-    let y = b.offender.name.toLowerCase()
-    if(x < y) return -1
-    if(x > y) return 1
-    return 0
-  })
-  $('.offender-list-item').html('')
-  displayOffenders(sortedOffenders)
-}
-
 sortOffenderDateList = () => {
   axios.get('/api/offenders')
   .then((res) => {
@@ -96,20 +82,6 @@ sortOffenderDateList = () => {
   .catch((err) => {
     console.error(err)
   })
-}
-
-sortByDate = (res) => {
-  const { offenders } = res.data
-
-  let sortedOffenders = offenders.sort((a, b) => {
-    let x = a.offender.date
-    let y = b.offender.date
-    if(x > y) return -1
-    if(x < y) return 1
-    return 0
-  })
-  $('.offender-list-item').html('')
-  displayOffenders(sortedOffenders)
 }
 
 $('.offender-list-item').on('click', '.name', (e) => {
