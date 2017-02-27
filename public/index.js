@@ -15,36 +15,19 @@ getOffendersList = () => {
 }
 
 displayOffenders = (offenders) => {
-  offenders.map(offense => {
+  offenders.map((offense) => {
     offendersTemplate(offense)
   })
 }
 
-offendersTemplate = (offense) => {
-  $('.offender-list-item').append(`
-    <p id=${offense.id} class='name'>${offense.offender.name}</p>
-    <div>${offense.offender.offense}</div>
-    <div>${offense.offender.date}</div>
-    <div>Forgiven: ${offense.offender.forgiven}</div>
-  `)
-}
-
 countOffenders = (offenders) => {
   let totalOffenders = offenders.length
-  let totalUnforgiven = offenders.filter(offense => {
+  let totalUnforgiven = offenders.filter((offense) => {
     return offense.offender.forgiven === false
   }).length
   let totalForgiven = totalOffenders - totalUnforgiven
 
   countTemplate(totalOffenders, totalUnforgiven, totalForgiven)
-}
-
-countTemplate = (totalOffenders, totalUnforgiven, totalForgiven) => {
-  $('.count').append(`
-    <div>${totalOffenders} total offenders</div>
-    <div>${totalUnforgiven} total unforgiven offenders</div>
-    <div>${totalForgiven} total forgiven offenders</div>
-  `)
 }
 
 clearValues = () => {
@@ -56,6 +39,7 @@ clearValues = () => {
 
 $('.save-offender-btn').on('click', (e) => {
   e.preventDefault()
+
   axios.post('/api/offenders', {
       name: $('.name-input').val(),
       offense: $('.offense').val(),
@@ -91,7 +75,7 @@ sortOffenderNameList = () => {
 }
 
 sortByName = (res) => {
-  const {offenders} = res.data
+  const { offenders } = res.data
 
   let sortedOffenders = offenders.sort((a, b) => {
     let x = a.offender.name.toLowerCase()
@@ -156,18 +140,9 @@ displayOffender = (res) => {
   singleOffenderTemplate(offender, id)
 }
 
-singleOffenderTemplate = (offender, id) => {
-  $('.offender-list-item').append(`
-    <p id=${offender.id} class='name'>${offender.name}</p>
-    <div>${offender.offense}</div>
-    <div>${offender.date}</div>
-    <button class='forgive' id=${id}>${offender.forgiven}</button>
-  `)
-}
-
 $('.offender-list-item').on('click', '.forgive', (e) => {
   const { id } = e.target
-  
+
   axios.patch(`/api/offenders/${id}`)
   .then((res) => {
     clearValues()
