@@ -7,19 +7,17 @@ getOffendersList = () => {
   .then((res) => {
     const { offenders } = res.data
     displayOffenders(offenders)
-    count(offenders)
+    const countedOffenders = countOffenders(offenders)
+    countTemplate(countedOffenders)
   })
   .catch((err) => {
     console.error(err)
   })
 }
 
-count = (offenders) => {
-  const countedOffenders = countOffenders(offenders)
-  countTemplate(countedOffenders)
-}
-
 displayOffenders = (offenders) => {
+  $('.offender-list-item').html('')
+
   offenders.map((offense) => {
     offendersTemplate(offense)
   })
@@ -62,7 +60,9 @@ $('.date-sort').on('click', () => {
 sortOffenderNameList = () => {
   axios.get('/api/offenders')
   .then((res) => {
-    sortByName(res)
+    const { offenders } = res.data
+    const sortedByName = sortByName(offenders)
+    displayOffenders(sortedByName)
   })
   .catch((err) => {
     console.error(err)
@@ -72,7 +72,9 @@ sortOffenderNameList = () => {
 sortOffenderDateList = () => {
   axios.get('/api/offenders')
   .then((res) => {
-    sortByDate(res)
+    const { offenders } = res.data
+    const sortedByDate = sortByDate(offenders)
+    displayOffenders(sortedByDate)
   })
   .catch((err) => {
     console.error(err)
